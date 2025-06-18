@@ -45,7 +45,7 @@ jobs:
             # type=sha,format=short,prefix=
             # pull request event
             type=ref,event=pr,format=short,prefix=pr-
-            type=ref,event=branch
+            # type=ref,event=branch
 
       - name: Echo image labels 
         shell: bash
