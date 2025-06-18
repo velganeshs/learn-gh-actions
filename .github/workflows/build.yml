@@ -1,9 +1,9 @@
 name: Upload a file
 
 on:
-  # pull_request:
-  #   branches:
-  #     - main
+  pull_request:
+    branches:
+      - main
   push:
     branches-ignore: main
   workflow_call:
@@ -42,7 +42,7 @@ jobs:
             prefix=
             suffix=
           tags: |
-            type=semver,pattern={{raw}}
+            type=sha,format=short,prefix=
 
       - name: Echo image labels 
         shell: bash
