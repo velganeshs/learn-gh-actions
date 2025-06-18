@@ -1,0 +1,13 @@
+name: Build
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-availability:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./github/workflows/build.yaml
+  
