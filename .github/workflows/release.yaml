@@ -1,30 +1,27 @@
-name: Upload a file
+name: Sane release
 
 on:
-  pull_request:
-    branches:
-      - main
   push:
-    branches-ignore: main
-  workflow_dispatch:
-  workflow_call:
+    tags:
+      - 'v*.*.*'
 
 jobs:
   build:
+    uses: ./.github/workflows/build.yml
+
+  check_file:
+    needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - run: mkdir -p path/to/artifact
-
-      - run: echo hello > path/to/artifact/world.txt
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+      - name: Download artifact
+        uses: actions/download-artifact@v4
         with:
           name: my-artifact
-          path: path/to/artifact/world.txt
+          path: ./downloaded-artifact
+
+      - name: Show artifact
+        run: |
+          ls -alR ./downloaded-artifact
 
       - name: Image metadata
         id: image-meta
@@ -47,4 +44,3 @@ jobs:
           echo "Image tags: ${{ steps.image-meta.outputs.tags }}"
           echo "Image labels: ${{ steps.image-meta.outputs.labels }}"
 
-      
