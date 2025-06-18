@@ -1,4 +1,4 @@
-name: Build
+name: Check availability of file
 
 on:
   pull_request:
