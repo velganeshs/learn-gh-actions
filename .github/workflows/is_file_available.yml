@@ -26,6 +26,27 @@ jobs:
             echo "File is not available."
             exit 1
           fi
+          
+      - name: Image metadata
+        id: image-meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            python
+          flavor: |
+            latest=auto
+            prefix=
+            suffix=
+          tags: |
+            type=sha,format=short,prefix=
+
+      - name: Echo image labels 
+        shell: bash
+        run: |
+          echo "Image name: ${{ steps.image-meta.outputs.tags }}"
+          echo "Image digest: ${{ steps.image-meta.outputs.digest }}"
+          echo "Image tags: ${{ steps.image-meta.outputs.tags }}"
+          echo "Image labels: ${{ steps.image-meta.outputs.labels }}"
         
       
   
