@@ -9,5 +9,8 @@ jobs:
   check-availability:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
       - uses: ./github/workflows/build.yaml
   
