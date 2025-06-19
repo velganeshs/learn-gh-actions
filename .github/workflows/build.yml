@@ -1,4 +1,4 @@
-name: Build
+name: Upload a file
 
 on:
   pull_request:
