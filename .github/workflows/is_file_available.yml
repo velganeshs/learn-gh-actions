@@ -1,0 +1,31 @@
+name: Check availability of file
+
+on:
+  push:
+    branches: main
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+
+  check_file:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: my-artifact
+          path: ./downloaded-artifact
+      - name: Show artifact
+        run: |
+          ls -alR ./downloaded-artifact
+          if [ -f ./downloaded-artifact/world.txt ]; then
+            echo "File is available."
+          else
+            echo "File is not available."
+            exit 1
+          fi
+        
+      
+  
