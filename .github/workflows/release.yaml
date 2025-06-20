@@ -1,8 +1,9 @@
-name: Check availability of file
+name: Sane release
 
 on:
   push:
-    branches: main
+    tags:
+      - 'v*.*.*'
 
 jobs:
   build:
@@ -17,16 +18,11 @@ jobs:
         with:
           name: my-artifact
           path: ./downloaded-artifact
+
       - name: Show artifact
         run: |
           ls -alR ./downloaded-artifact
-          if [ -f ./downloaded-artifact/world.txt ]; then
-            echo "File is available."
-          else
-            echo "File is not available."
-            exit 1
-          fi
-          
+
       - name: Image metadata
         id: image-meta
         uses: docker/metadata-action@v5
@@ -38,7 +34,7 @@ jobs:
             prefix=
             suffix=
           tags: |
-            type=sha,format=short,prefix=
+            type=semver,pattern={{raw}}
 
       - name: Echo image labels 
         shell: bash
@@ -47,6 +43,4 @@ jobs:
           echo "Image digest: ${{ steps.image-meta.outputs.digest }}"
           echo "Image tags: ${{ steps.image-meta.outputs.tags }}"
           echo "Image labels: ${{ steps.image-meta.outputs.labels }}"
-        
-      
-  
+
