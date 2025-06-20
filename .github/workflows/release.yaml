@@ -32,8 +32,6 @@ jobs:
             python
           flavor: |
             latest=auto
-            prefix=
-            suffix=
           tags: |
             type=semver,pattern={{raw}}
 
