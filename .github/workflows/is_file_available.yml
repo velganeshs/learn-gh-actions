@@ -34,12 +34,8 @@ jobs:
         with:
           images: |
             python
-          flavor: |
-            latest=auto
-            prefix=
-            suffix=
           tags: |
-            type=sha,format=short,prefix=
+            type=sha,format=short
 
       - name: Echo image labels 
         shell: bash
