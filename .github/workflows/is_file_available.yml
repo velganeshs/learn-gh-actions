@@ -34,8 +34,8 @@ jobs:
         with:
           images: |
             python
-          # tags: |
-          #   type=sha
+          tags: |
+            type=sha,enable=true,priority=100,prefix=sha-,suffix=,format=short
 
       - name: Echo image labels 
         shell: bash
