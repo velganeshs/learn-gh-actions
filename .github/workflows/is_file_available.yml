@@ -36,6 +36,7 @@ jobs:
             python
           tags: |
             type=sha,prefix=sha-,format=short
+            type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Echo image labels 
         shell: bash
